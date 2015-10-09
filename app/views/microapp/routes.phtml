@@ -1,0 +1,13 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: sks
+ * Date: 2015/9/10
+ * Time: 13:22
+ */
+
+?>
+<h3>This is a form to test token.</h3>
+<?php echo Phalcon\Tag::form('/manage/login'); ?>
+    <input type="hidden" name="<?php echo $this->security->getTokenKey();?>" value="<?php echo $this->security->getToken();?>" />
+</form>
