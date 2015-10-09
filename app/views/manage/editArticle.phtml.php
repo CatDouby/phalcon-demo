@@ -36,5 +36,8 @@ Name: <?php echo $name; ?> Value: <?php echo $value; ?> >= 2
         <li><input type="submit" value="DO"></li>
     </ul>
 </form>
+
+<?php print_r($this->menu); ?>
+<?php echo $uri; ?>
 </body>
 </html>

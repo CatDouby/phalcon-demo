@@ -7,13 +7,12 @@
  * Time: 13:20
  */
 
-use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Micro;
 use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 use Phalcon\Paginator\Adapter\NativeArray as PaginatorArray;
 use Phalcon\Paginator\Adapter\QueryBuilder as PaginatorQueryBuilder;
 
-class ManageController extends Controller
+class ManageController extends BaseController
 {
     const sessPrefix = 'user-';
     private $app;
@@ -28,7 +27,20 @@ class ManageController extends Controller
     {
         $this->app = new Micro();
 
+        print_r(get_class_methods($this->request));
         $uri = $this->request->getURI();
+        echo $uri, '<br/>';
+        print_r($this->request->getQuery());
+        echo '<br/>';
+
+        print_r(get_class_methods($this->dispatcher));
+        echo '<br/>';
+        print_r($this->dispatcher->getParams());
+        echo '<br/>';
+
+        die;
+        $this->view->uri = $uri;
+
         if (!in_array($uri, $this->noCheck)) {
             if (!$this->checkAuth()) {
                 $this->app->response->redirect('/manage/index');
@@ -179,6 +191,7 @@ class ManageController extends Controller
     {
         error_reporting(11); // 1开启fatal 2开启warning 8开启notice 0关闭
         $id = (int)$this->request->get('i');
+
 
 
 //        $this->session->start();

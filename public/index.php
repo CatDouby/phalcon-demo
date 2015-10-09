@@ -28,17 +28,25 @@ try {
     $di = new FactoryDefault();
 
     // Set the database service
-    $di['db'] = function() {
+    $di['db'] = function () {
         return new DbAdapter(array(
-            "host"     => "localhost",
+            "host" => "localhost",
             "username" => "root",
             "password" => "123456",
-            "dbname"   => "tutorial"
+            "dbname" => "tutorial"
         ));
     };
 
+    $di->setShared('menu', function () {
+        return array(
+            array('label' => 'xx', 'link' => 'admin/index'),
+            array('label' => 'yy', 'link' => 'index/signin'),
+            array('label' => 'xx', 'link' => 'index/signout'),
+        );
+    });
+
     // Setting up the view component
-    $di['view'] = function() {
+    $di['view'] = function () {
         $view = new View();
         $view->setViewsDir('../app/views/');
         /*$view->registerEngines(array(
@@ -51,7 +59,7 @@ try {
     };
 
     // Setup a base URI so that all generated URIs include the "tutorial" folder
-    $di['url'] = function() {
+    $di['url'] = function () {
         $url = new Url();
 //        $url->setBaseUri('/tutorial/');
         $url->setBaseUri('/');
@@ -59,15 +67,16 @@ try {
     };
 
     // Setup the tag helpers
-    $di['tag'] = function() {
+    $di['tag'] = function () {
         return new Tag();
     };
 
-    $di['session'] = function() {
+    $di['session'] = function () {
         $session = new Session();
         $session->start();
         return $session;
     };
+
 
     // Setup the security plugin
     $di->set('dispatcher', function () {
@@ -86,9 +95,9 @@ try {
         return $dispatcher;
     });
 
+
     // Handle the request
     $application = new Application($di);
-
     echo $application->handle()->getContent();
 
 } catch (Exception $e) {

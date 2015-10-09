@@ -1,9 +1,8 @@
 <?php
 
-use Phalcon\Mvc\Controller;
-use Phalcon\Mvc\Micro;
 
-class MicroAppController extends Controller
+
+class MicroAppController extends BaseController
 {
     private $mapp;
 

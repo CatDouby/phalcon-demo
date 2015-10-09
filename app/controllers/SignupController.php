@@ -1,8 +1,7 @@
 <?php
 
-use Phalcon\Mvc\Controller;
 
-class SignupController extends Controller
+class SignupController extends BaseController
 {
 
 	public function indexAction()
